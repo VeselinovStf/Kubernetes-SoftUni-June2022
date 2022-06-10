@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: app-rs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+        ver: v10
+    spec:
+      containers:
+        - name: app-container
+          image: shekeriev/k8s-appa:v1
+          ports:
+            - containerPort: 80    
+    
