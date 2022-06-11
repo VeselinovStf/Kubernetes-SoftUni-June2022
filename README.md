@@ -5,6 +5,10 @@
 ## Themes
 
 1. Core Concepts
+    - Introduction to Orchestration;
+    - Kubernetes Architecture;
+    - Kubernetes API and Tools;
+    - Working with Basic Objects (Pods, Services, Deployments, etc.).
 2. Cluster Setup and Management
 3. Security and Policies
 4. Storage and Persistence
