@@ -1,0 +1,61 @@
+# -*- mode: ruby -*-
+# vi: set ft-ruby :
+
+Vagrant.configure("2") do |config|
+    config.ssh.insert_key = false
+
+  # Lab
+  config.vm.define "k8s" do |k8s|
+    k8s.vm.box="debian/buster64"
+    k8s.vm.hostname = "k8s.k8s.lab"
+    k8s.vm.network "private_network", ip: "192.168.99.101"
+    k8s.vm.synced_folder "vagrant/", "/vagrant"
+    k8s.vm.provision "shell", path: "./scripts/debian/k8s/k8s-vm-initial-setup-debian.sh"
+    k8s.vm.provision "shell", path: "./scripts/debian/docker/docker-install-debian.sh"
+    k8s.vm.provision "shell", path: "./scripts/debian/k8s/k8s-container-config-debian.sh"
+    k8s.vm.provision "shell", path: "./scripts/debian/k8s/k8s-components-debian.sh"
+    k8s.vm.provision "shell", path: "./scripts/debian/k8s/k8s-node-debian.sh"
+    k8s.vm.provision "shell", path: "./scripts/debian/k8s/k8s-cluster-init-debian.sh"
+    k8s.vm.provider :virtualbox do |vb|
+        vb.memory = 4096
+        vb.cpus = 2
+        vb.gui = false
+    end
+  end
+
+  config.vm.define "k8s2" do |k8s2|
+    k8s2.vm.box="debian/buster64"
+    k8s2.vm.hostname = "k8s2.k8s.lab"
+    k8s2.vm.network "private_network", ip: "192.168.99.102"
+    k8s2.vm.synced_folder "vagrant/", "/vagrant"
+    k8s2.vm.provision "shell", path: "./scripts/debian/k8s/k8s-vm-initial-setup-debian.sh"
+    k8s2.vm.provision "shell", path: "./scripts/debian/docker/docker-install-debian.sh"
+    k8s2.vm.provision "shell", path: "./scripts/debian/k8s/k8s-container-config-debian.sh"
+    k8s2.vm.provision "shell", path: "./scripts/debian/k8s/k8s-components-debian.sh"
+    k8s2.vm.provision "shell", path: "./scripts/debian/k8s/k8s-node-debian.sh"
+    k8s2.vm.provision "shell", path: "./scripts/debian/k8s/k8s-join-node-debian.sh"
+    k8s2.vm.provider :virtualbox do |vb|
+        vb.memory = 4096
+        vb.cpus = 2
+        vb.gui = false
+    end
+  end
+
+  # config.vm.define "k8s3" do |k8s3|
+  #   k8s3.vm.box="debian/buster64"
+  #   k8s3.vm.hostname = "k8s3.k8s.lab"
+  #   k8s3.vm.network "private_network", ip: "192.168.99.103"
+  #   k8s3.vm.synced_folder "vagrant/", "/vagrant"
+  #   k8s3.vm.provision "shell", path: "./scripts/debian/k8s/k8s-vm-initial-setup-debian.sh"
+  #   k8s3.vm.provision "shell", path: "./scripts/debian/docker/docker-install-debian.sh"
+  #   k8s3.vm.provision "shell", path: "./scripts/debian/k8s/k8s-container-config-debian.sh"
+  #   k8s3.vm.provision "shell", path: "./scripts/debian/k8s/k8s-components-debian.sh"
+  #   k8s3.vm.provision "shell", path: "./scripts/debian/k8s/k8s-node-debian.sh"
+  #   k8s3.vm.provision "shell", path: "./scripts/debian/k8s/k8s-join-node-debian.sh"
+  #   k8s3.vm.provider :virtualbox do |vb|
+  #       vb.memory = 2048
+  #       vb.cpus = 2
+  #       vb.gui = false
+  #   end
+  # end
+end

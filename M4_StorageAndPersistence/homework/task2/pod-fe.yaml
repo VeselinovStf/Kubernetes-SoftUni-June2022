@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-fe
+spec:
+  replicas: 3
+  selector:
+    matchLabels: 
+      app: pod-fe
+  template:
+    metadata:
+      labels:
+        app: pod-fe
+    spec:
+      containers:
+      - name: pod-fe
+        image: shekeriev/k8s-facts-fe
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: homework-cm
+

@@ -1,0 +1,1 @@
+kubeadm join 192.168.99.101:6443 --token mnbeuh.0sx19f8kv9cy21ow --discovery-token-ca-cert-hash sha256:3c9945cb9fd679dbc9bfd4c5adc5f384f03ab7eab0dae9ba7a29b47cf1ebf51f
