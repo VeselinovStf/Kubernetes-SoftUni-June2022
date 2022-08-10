@@ -1,0 +1,10 @@
+namePrefix: test-
+commonLabels:
+  variant: test
+commonAnnotations:
+  note: test
+resources:
+- ../../base
+patchesStrategicMerge:
+- deployment.yaml
+- service.yaml

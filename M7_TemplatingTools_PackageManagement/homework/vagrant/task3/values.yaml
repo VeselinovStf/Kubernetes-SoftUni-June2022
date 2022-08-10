@@ -1,0 +1,3 @@
+contentText: "<h1>Hello from NGINX!</h1>"
+replicasCount: 5
+nodePort: 31000
